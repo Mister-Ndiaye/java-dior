@@ -244,6 +244,8 @@ public class CreationCompte extends javax.swing.JFrame {
 
         user.setUsername(username.getText());
         user.setPassword(password.getText());
+        user.setFirstName(firstname.getText());
+        user.setLastName(lastname.getText());
         
         users.add(user);
         ConnectionDb.addUser(user);

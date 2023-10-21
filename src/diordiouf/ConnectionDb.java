@@ -22,7 +22,7 @@ import java.util.logging.Logger;
  */
 public class ConnectionDb {
 
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/dior_diouf";
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/db_java";
     private static final String DB_USER = "root";
     private static final String DB_PASSWORD = "";
     
@@ -50,10 +50,12 @@ public class ConnectionDb {
       Connection  conn = connection();
         try {
             Statement stmt = conn.createStatement();
-            String sql = "insert into user(username,password) values(?,?)";
+            String sql = "insert into users(first_name,last_name,username,password) values(?,?,?,?)";
             PreparedStatement  statement =conn.prepareStatement(sql);
-            statement.setString(1, user.getUsername());
-            statement.setString(2, user.getPassword());
+            statement.setString(1, user.getFirstName());
+            statement.setString(2, user.getLastName());
+            statement.setString(3, user.getUsername());
+            statement.setString(4, user.getPassword());
             
             statement.executeUpdate();
             conn.close();
@@ -85,7 +87,7 @@ public class ConnectionDb {
     public static boolean verifieUtilisateur(Utilisateur utilisateur){
         Connection  connection = connection();
         try {
-            String sql = "select * from user where username = ? and password = ?";
+            String sql = "select * from users where username = ? and password = ?";
             // Préparer la requête SQL
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setString(1, utilisateur.getUsername());
